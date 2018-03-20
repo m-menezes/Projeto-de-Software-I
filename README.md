@@ -1,9 +1,9 @@
 # Disciplina Projeto de Software I
->Nome: **Marcelo Menezes||Fabio Gomes||Laiser Mello||Matuzalem Borges**<br>
->Professora - **Welfer**<br>
+>Nome: **Marcelo Menezes || Fabio Gomes || Laiser Mello || Matuzalem Borges**<br>
+>Professor - **Daniel Welfer**<br>
 
-### Smartcycle
-Smartcycle é um projeto para disciplina [ELC1073] - Projeto de Software I, com o objetivo de otimizar e gerenciar a da coleta de materiais recicláveis, facilitando o contato entre entidades de recebimento e interessados.<br>
+### SmartRecycle
+SmartRecycle é um projeto para disciplina [ELC1073] - Projeto de Software I, com o objetivo de otimizar e gerenciar a da coleta de materiais recicláveis, facilitando o contato entre entidades de recebimento e interessados.<br>
 
 ##### O sistema contará com níveis de usuários
 - Nível 0 - SuperAdmin

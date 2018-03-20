@@ -12,7 +12,7 @@ use App\Pessoa;
 Use Auth;
 
 
-class SmartcycleController extends Controller{
+class SmartRecycleController extends Controller{
 	public function index(){
 		$noticias = Noticia::orderBy('created_at', 'DESC')->get();
 		return view('index', compact( ['noticias'] ));
