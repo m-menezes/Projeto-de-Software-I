@@ -6,7 +6,7 @@
 	<div class="m-4">
 		<div class="row">
 			<p>
-				Smartcycle é um projeto para disciplina <strong>[ELC1073] - Projeto de Software I</strong>, com o objetivo de otimizar e gerenciar a da coleta de materiais recicláveis, facilitando o contato entre entidades de recebimento e interessados.
+				{{ucfirst(config('app.name'))}} é um projeto para disciplina <strong>[ELC1073] - Projeto de Software I</strong>, com o objetivo de otimizar e gerenciar a da coleta de materiais recicláveis, facilitando o contato entre entidades de recebimento e interessados.
 			</p>
 		</div>
 		<div class="row">

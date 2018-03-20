@@ -29,7 +29,7 @@ class Users extends Seeder
         }
 
         $org = Organizacao::create([
-            'name' => 'Smartcycle',
+            'name' => 'SmartRecycle',
             'cnpj' => '12345678901234',
         ]);
         $org = [

@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Smartcycle'),
+    'name' => env('APP_NAME', 'SmartRecycle'),
 
     /*
     |--------------------------------------------------------------------------
