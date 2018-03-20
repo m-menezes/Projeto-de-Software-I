@@ -1,0 +1,266 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+body{
+	font-family: 'Raleway', sans-serif;
+	font-weight: 500;
+	min-height: 100vh;
+	position: relative;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+	font-family: 'Raleway', sans-serif;
+	font-weight: 100;
+}
+legend{
+	font-size: 2rem !important;
+}
+@media(min-width: 1200px){
+	.bg-topo{
+		height: 250px;
+	}
+	.bg-topo a{
+		position: absolute;
+		transform: translate(-50%, 0px);
+		bottom: 25%;
+		width: 25%;
+	}
+}
+@media(min-width: 992px) and (max-width: 1200px){
+	.bg-topo{
+		height: 225px;
+	}
+	.bg-topo a{
+		position: absolute;
+		transform: translate(-50%, 0px);
+		bottom: 25%;
+		width: 25%;
+	}
+}
+
+@media(min-width: 768px) and (max-width: 992px){
+
+	.bg-topo{
+		height: 200px;
+	}
+	.bg-topo a{
+		position: absolute;
+		transform: translate(-50%, 0px);
+		bottom: 25%;
+	}
+	.table-cell{
+		padding: 40% 0;
+	}
+	#carousel-topo{
+		height: 400px;
+		width: 100%;
+		overflow: hidden;
+	}
+	.carousel-inner{
+		height: 400px;
+	}
+
+}
+@media(min-width: 576px) and (max-width: 768px){
+
+
+	.krajee-default.file-preview-frame {
+		width: unset !important;
+	}
+	.bg-topo{
+		height: 150px;
+	}
+	.bg-topo h2{
+		font-size: 1.4rem;
+	}
+	.bg-topo a{
+		position: absolute;
+		transform: translate(-50%, 0px);
+		padding: 2px 10px !important;
+		bottom: 25%;
+	}
+	#carousel-topo{
+		display: none;
+	}
+	.table-cell{
+		padding: 30px;
+	}
+	.icone-cadastro svg{
+		display: none;
+	}
+	.copyright-left,
+	.copyright-right{
+		text-align: center !important;
+	}
+}
+/* xs - SM || MOBILE */
+@media(max-width: 576px){
+
+	.bg-topo h2{
+		font-size: 1.2rem;
+	}
+	.bg-topo{
+		height: 100px;
+		background-image: unset !important;
+	}
+	.bg-topo a{
+		position: absolute;
+		transform: translate(-50%, 0px);
+		padding: 2px 10px !important;
+		bottom: 10%;
+	}
+
+}
+
+@media (min-width: 992px){
+	.link-login{
+		display: none;
+	}
+	.badge-user{
+		display: visible;
+	}
+}
+@media (max-width: 992px){
+	.dropdown-menu{
+		background: transparent !important;
+		border: 0px !important;
+	}
+	.dropdown-item{
+		color: white !important;
+	}
+	.link-login{
+		display: visible;
+	}
+	.badge-user{
+		display: none;
+	}
+
+}
+footer{
+	width: 100%;
+	line-height: 39px;
+	background-color: #f1f1f1;
+	position: absolute;
+	bottom: 0;
+}
+.copyright-right{
+	text-align: right;
+}
+.weight-300{
+	font-weight: 300;
+}
+
+.flex-center{
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.table-cell form{
+	display: table-cell;
+	vertical-align: middle;
+}
+.icone-cadastro{
+	text-align: center;
+}
+
+.carousel-caption{
+	background: rgba(0,0,0,0.5);
+	left: unset !important;
+	right: unset !important;
+	bottom: 100px !important;
+	padding: unset !important;
+}
+.carousel-caption .caption-text{
+	width: 75%;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px 0px;
+}
+.field-border{
+	border: 1px solid #ccc;
+	margin-top: 30px;
+}
+.field-border legend{
+	font-family: 'Raleway', sans-serif;
+	font-weight: 300;
+	width: unset !important;
+	border: 0px !important;
+	padding: 0px 20px;
+	margin: 0px 20px;
+	position: relative;
+}
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11{
+	float:left;
+}
+.table-cell{
+	display: table;
+	margin: auto;
+	max-height: 100vh;
+	min-height: 80vh;
+}
+.card-list-noticias .overlay{
+	max-height: 300px;
+	overflow: hidden;
+}
+.card-list-noticias{
+	box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.75)!important;
+}
+.bg-topo{
+	background-image: url(/images/green_city.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: bottom;
+	background-color: #f1f1f1;
+	position: relative;
+
+}
+.bg-topo #text-topo{
+	text-align: center;
+	padding-top: 5%;
+}
+.badge-user{
+	position: absolute;
+	right: 0;
+}
+.jumbotron{
+	background: url(/images/bg_slide.png) repeat 0 0 #ebebea;
+	margin: 0;
+	padding: 25px 0px !important;
+	line-height: 26px;
+}
+.block-title {
+	margin: 0;
+	position: relative;
+	text-align: center;
+	line-height: 1.2;
+	color: #3f3f3f;
+}
+.block-title:after {
+	content: "";
+	height: 0px;
+	width: 50px;
+	position: absolute;
+	bottom: -2px;
+	left: 50%;
+	margin-left: -25px;
+	border-bottom: 1px solid #dc3545;
+}
+.card-title{
+	position:relative;
+}
+.card-title a{
+	text-decoration: none;
+}
+.card-title a:after {
+	height: 0;
+	position: absolute;
+	bottom: 5px;
+	left: 0;
+	width: 30px;
+	content: "";
+	border-bottom: 1px solid #28a745;
+}
