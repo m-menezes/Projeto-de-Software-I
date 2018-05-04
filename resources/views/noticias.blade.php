@@ -11,7 +11,7 @@
 		</div>
 		@endif
 		@endauth
-		<div class="row mx-3">
+		<div class="row">
 			@foreach($registros as $registro)
 			<!--Card-->
 			<div class="card card-cascade wider reverse my-2 card-list-noticias">

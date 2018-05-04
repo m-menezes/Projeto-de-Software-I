@@ -48,7 +48,7 @@ class LoginController extends Controller
     public function doLogin(Request $request){
         $email          = $request['email-user'];
         $password       = $request['password-user'];
-        if (Auth::attempt(['email' => $email, 'password' => $password]) || Auth::guard('org')->attempt(['email' => $email, 'password' => $password])){
+        if (Auth::attempt(['email' => $email, 'password' => $password])){
             return redirect()->route('home');
         }
         return redirect()->back(); 
@@ -56,7 +56,6 @@ class LoginController extends Controller
 
     public function logout(){
         Auth::logout();
-        Auth::guard('org')->logout();
         return redirect()->route('home');
     }
 

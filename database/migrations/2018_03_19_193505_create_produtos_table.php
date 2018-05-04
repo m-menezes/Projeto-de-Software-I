@@ -23,7 +23,10 @@ class CreateProdutosTable extends Migration
             $table->string('numero');
             $table->string('bairro');
             $table->string('complemento')->nullable();
+            $table->string('status');
+            $table->datetime('datareserva')->nullable();
             $table->integer('idpessoa')->unsigned()->references('id')->on('pessoa');
+            $table->integer('idorganizacao')->unsigned()->nullable()->references('id')->on('organizacao');
             $table->timestamps();
         });
     }
