@@ -15,13 +15,13 @@
 				<div class="form-group col-6">
 					<select name="tipo" class="form-control" id="tipo">
 						<option disabled selected>Tipo de Produto</option>
-						<option value="plastico">Plástico</option>
-						<option value="metal">Metal</option>
-						<option value="papel">Papel</option>
-						<option value="vidro">Vidro</option>
-						<option value="tecido">Tecido</option>
-						<option value="eletronico">Eletrónico</option>
-						<option value="outro">Outro</option>
+						<option value="Plastico">Plástico</option>
+						<option value="Metal">Metal</option>
+						<option value="Papel">Papel</option>
+						<option value="Vidro">Vidro</option>
+						<option value="Tecido">Tecido</option>
+						<option value="Eletronico">Eletrónico</option>
+						<option value="Outro">Outro</option>
 					</select>
 				</div>
 			</div>

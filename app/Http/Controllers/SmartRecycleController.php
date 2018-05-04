@@ -9,6 +9,7 @@ use App\User;
 use App\Organizacao;
 use App\Produto;
 use App\Pessoa;
+use DateTime;
 Use Auth;
 
 
@@ -23,7 +24,7 @@ class SmartRecycleController extends Controller{
 		return view('dashboard.usuarios', compact( ['usuarios', 'organizacoes'] ));
 	}
 	public function produto(){
-		if(Auth::user()->roles == 0){
+		if(Auth::user()->roles == 0 || Auth::user()->roles == 2){
 			// VERIFICAR QUERY
 			$registros =  Produto::	join('pessoas', 'produtos.idpessoa', '=', 'pessoas.id')
 			->join('users', 'produtos.idpessoa', '=', 'users.idroles')
@@ -34,7 +35,6 @@ class SmartRecycleController extends Controller{
 			return view('dashboard.produto', compact( ['registros'] ));
 		}
 		else{
-			$registros = Produto::where('idpessoa', '=', Auth::user()->id )->orderBy('created_at', 'DESC')->get();
 			$registros = Produto::join('pessoas', 'produtos.idpessoa', '=', 'pessoas.id')
 			->join('users', 'produtos.idpessoa', '=', 'users.idroles')
 			->where('idpessoa', '=', Auth::user()->idroles, 'AND', 'users.roles', '<', 2 )
@@ -44,6 +44,7 @@ class SmartRecycleController extends Controller{
 			return view('dashboard.produto', compact( ['registros'] ));
 		}
 	}
+
 	public function adicionar_produto(){
 		return view('dashboard.produto-adicionar');
 	}
@@ -66,18 +67,43 @@ class SmartRecycleController extends Controller{
 
 		}
 		else{
-
+			$request['status'] = 'Disponivel';
 			$request['idpessoa'] = Auth::user()->idroles;
 			Produto::create($request);
 			return redirect()->route('produto');
 		}
 	}
+	public function editar_produto($id){
+	}
+
+	public function update_produto($id){
+	}
+
+	public function status_produto(Request $id){
+		$id = $id->all();
+		$dataservidor = new DateTime();
+		$produto = Produto::find($id["id"]);
+		if($produto->status == 'Disponivel'){
+			$produto->status = 'Reservado';
+			$produto->idorganizacao = Auth::user()->idroles;
+			$produto->datareserva = $dataservidor->format('Y-m-d H:i:s');
+		}
+		else if($produto->status == 'Reservado'){
+			$produto->status = 'Disponivel';
+			$produto->idorganizacao = NULL;
+			$produto->datareserva = NULL;
+		}
+		$produto->update();
+		return ($produto);		
+		/*TODO ALTERA STATUS, SALVA DATA E HORA*/
+	}
+
 	public function delete_produto($id){
 		$destroy = Produto::find($id);
 		$query = Pessoa::join('produtos', 'produtos.idpessoa', '=', 'pessoas.id')
-					->where('produtos.id', '=', $id)
-					->select('pessoas.id')
-					->get();
+		->where('produtos.id', '=', $id)
+		->select('pessoas.id')
+		->get();
 		$pessoa = collect($query->toArray())->all()[0];
 		if(Auth::user()->roles == 0 || $pessoa['id'] == $destroy->idpessoa){
 			$destroy->delete();

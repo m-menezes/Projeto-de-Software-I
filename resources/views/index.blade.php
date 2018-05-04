@@ -3,16 +3,17 @@
 <div class="bg-topo w-100">
 	@include('_includes.index-topo')
 </div>
+@include('_includes.sobre')
 <div class="jumbotron w-100">
 	<div class="container">
 		<h1 class="block-title weight-300">Notícias</h1>
 	</div>
 </div>
-<div class="container p-0 mb-4">
-	<div class="row m-2">
+<div class="container p-0 mt-5">
+	<div class="row">
 		<div class="card-columns">
 			@foreach($noticias as $noticia)
-			<div class="card">
+			<div class="card m-0">
 				@if($noticia->imagem_path)
 				<img class="card-img-top" src="{{$noticia->imagem_path}}" alt="{{$noticia->titulo}}">
 				@endif
@@ -27,5 +28,6 @@
 		</div>
 	</div>
 </div>
+@include('_includes.documentacao')
 @endsection
 

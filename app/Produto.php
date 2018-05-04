@@ -16,8 +16,14 @@ class Produto extends Model
         'bairro',
         'complemento',
         'idpessoa',
+        'idorganizacao',
+        'status',/*Disponivel, Reservado, Concluido*/
+        'datareserva',
     ];
     public function idpessoa(){
         return $this->hasOne('App\Pessoa');
+    }
+    public function idorganizacao(){
+        return $this->hasOne('App\Organizacao');
     }
 }

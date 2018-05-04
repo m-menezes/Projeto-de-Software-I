@@ -30,6 +30,9 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/produto/adicionar', 			['as' => 'adicionar_produto', 	'uses' => 'SmartRecycleController@adicionar_produto']);
 	Route::post('/produto/adicionar', 			['as' => 'create_produto', 		'uses' => 'SmartRecycleController@create_produto']);
 	Route::get('/produto/deletar/{id}', 		['as' => 'delete_produto', 		'uses' => 'SmartRecycleController@delete_produto']);
+	Route::get('/produto/editar/{id}', 			['as' => 'editar_produto', 		'uses' => 'SmartRecycleController@editar_produto']);
+	Route::post('/produto/update/{id}', 		['as' => 'update_produto', 		'uses' => 'SmartRecycleController@update_produto']);
+	Route::get('/produto/status',	 			['as' => 'status_produto', 		'uses' => 'SmartRecycleController@status_produto']);
 });
 
 
@@ -37,7 +40,7 @@ Route::group(['middleware' => 'auth'], function(){
 
 
 /** GUEST **/
-Route::get('/sobre', 							function () {return view('sobre');});
+Route::get('/documentacao', 					function () {return view('documentacao');});
 Route::get('/noticias', 						['as' 	=> 'noticias', 			'uses' => 'NoticiaController@noticias']);
 Route::get('/', 								['as' 	=> 'home',				'uses' => 'SmartRecycleController@index']);
 Route::get('/login',							['as'    => 'login', 			'uses' => 'Auth\LoginController@login']);

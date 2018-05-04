@@ -9,7 +9,7 @@
 	<!--Imports CSS-->
 	<link href="/css/bootstrap.css?ver=1.1" rel="stylesheet" >
 	<link href="/css/glyph.css" rel="stylesheet" >
-	<link href="/css/app.css?ver=1232" rel="stylesheet">
+	<link href="/css/app.css?ver=2.01" rel="stylesheet">
 	<link href="/css/fileinput.css?ver=1.04" media="all" rel="stylesheet" type="text/css"/>
 	<link href="/themes/explorer-fa/theme.css" media="all" rel="stylesheet" type="text/css"/>
 	<link href="https://fonts.googleapis.com/css?family=Raleway:100,300,500,600" rel="stylesheet" type="text/css">
@@ -38,13 +38,14 @@
 	<div class="row pb-5">
 		@yield('conteudo')
 	</div>
+	<a href="#" id="button_topo" title="Ir para o topo"><i class="fa fa-3x fa-chevron-circle-up" aria-hidden="true"></i></a>
 	<footer>
 		<div class="container">
 			<div class="row"> 
-				<div class="col-md-6 copyright-left">
+				<div class="col-md-6 copyright copyright-left">
 					<small class="m-0">Marcelo || Zalem || Fabio || Laiser</small>
 				</div>
-				<div class="col-md-6 copyright-right">
+				<div class="col-md-6 copyright copyright-right">
 					<small class="m-0"><i class="fas fa-recycle"></i> {{config('app.name')}}</small>
 				</div>
 			</div>
@@ -52,6 +53,21 @@
 	</footer>
 
 	<script type="text/javascript">
+		$('[data-toggle="popover"]').popover();
+		window.onscroll = function() {scrollFunction()};
+
+		function scrollFunction() {
+			if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+				document.getElementById("button_topo").style.display = "block";
+			} else {
+				document.getElementById("button_topo").style.display = "none";
+			}
+		}
+
+		$('#button_topo').click(function(){
+			$('html, body').animate({scrollTop : 0},500);
+			return false;
+		});
 		@yield('script')
 	</script>
 </body>

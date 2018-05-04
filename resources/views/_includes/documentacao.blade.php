@@ -1,23 +1,8 @@
-@extends('template.template')
-@section('conteudo')
-<?php $titulo = "Sobre o sistema"; ?>
+<?php $titulo = "Documentação"; ?>
 @include('_includes.titulo')
+<div id="documentacao"></div>
 <div class="container">
-	<div class="m-4">
-		<div class="row">
-			<p>
-				{{ucfirst(config('app.name'))}} é um projeto para disciplina <strong>[ELC1073] - Projeto de Software I</strong>, com o objetivo de otimizar e gerenciar a da coleta de materiais recicláveis, facilitando o contato entre entidades de recebimento e interessados.
-			</p>
-		</div>
-		<div class="row">
-			<h5 class="weight-300 w-100">Equipe</h5>
-			<ul>
-				<li><cite>Fabio Gomes</cite></li>
-				<li><cite>Laiser Mello</cite></li>
-				<li><cite>Marcelo Menezes</cite></li>
-				<li><cite>Matuzalem Borges</cite></li>
-			</ul>
-		</div>
+	<div class="m-4 mt-5">
 		<div class="row">
 			<h5 class="weight-300 w-100">Documentação do sistema</h5>
 			<ul>
@@ -64,4 +49,3 @@
 		</div>
 	</div>
 </div>
-@endsection
