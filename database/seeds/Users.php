@@ -31,6 +31,7 @@ class Users extends Seeder
         $org = Organizacao::create([
             'name' => 'SmartRecycle',
             'cnpj' => '12345678901234',
+            'telefone' => '5599999999',
         ]);
         $org = [
             'email'=>"org@admin",

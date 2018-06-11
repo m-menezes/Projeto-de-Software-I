@@ -21,6 +21,7 @@ Route::group(['middleware' => 'auth', 'middleware' => 'superadmin'], function(){
 	Route::post('/noticias/adicionar/save', 	['as' => 'save_noticia', 		'uses' => 'NoticiaController@save_noticia']);
 	/*LISTA DE USUARIOS*/
 	Route::get('/usuarios', 					['as' => 'lista_users',			'uses' => 'SmartRecycleController@lista_users']);
+	Route::get('/usuarios/roles', 				['as' => 'roles_users',			'uses' => 'SmartRecycleController@roles_users']);
 
 });
 /** SUPERADMIN **/
@@ -31,8 +32,13 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::post('/produto/adicionar', 			['as' => 'create_produto', 		'uses' => 'SmartRecycleController@create_produto']);
 	Route::get('/produto/deletar/{id}', 		['as' => 'delete_produto', 		'uses' => 'SmartRecycleController@delete_produto']);
 	Route::get('/produto/editar/{id}', 			['as' => 'editar_produto', 		'uses' => 'SmartRecycleController@editar_produto']);
-	Route::post('/produto/update/{id}', 		['as' => 'update_produto', 		'uses' => 'SmartRecycleController@update_produto']);
-	Route::get('/produto/status',	 			['as' => 'status_produto', 		'uses' => 'SmartRecycleController@status_produto']);
+	Route::get('/produto/update/{id}', 			['as' => 'update_produto', 		'uses' => 'SmartRecycleController@update_produto']);
+	Route::get('/produto/status/{id}',	 		['as' => 'status_produto', 		'uses' => 'SmartRecycleController@status_produto']);
+	/*EDITAR CONTA*/
+	Route::get('/conta/editar/{id}',	 		['as' => 'editar_conta', 		'uses' => 'SmartRecycleController@editar_conta']);
+	Route::get('/conta/update/{id}/senha',	 	['as' => 'update_senha', 		'uses' => 'SmartRecycleController@update_senha']);
+	Route::get('/conta/update/{id}/conta',	 	['as' => 'update_conta', 		'uses' => 'SmartRecycleController@update_conta']);
+	Route::get('/conta/delete/{id}',	 		['as' => 'delete_conta', 		'uses' => 'SmartRecycleController@delete_conta']);
 });
 
 
