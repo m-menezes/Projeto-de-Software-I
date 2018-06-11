@@ -20,24 +20,21 @@
 					<img width="100%"; src="{{$registro->imagem_path}}" />
 				</div>
 				@endif
-				<div class="card-body pb-0">
+				<div class="card-body <?php echo (isset(Auth::user()->roles) == 0) ? 'pb-0' : ''; ?>">
 					<h4 class="card-title text-center"><strong>{{$registro->titulo}}</strong></h4>
 					<h6 class="indigo-text weight-300">Data de Publicação: {{$registro->created_at}}</h6>
 					<p class="card-text"><?php echo nl2br($registro->descricao); ?></p>
 				</div>
 				@auth
-				@if(Auth::user()->roles == 0)
+				@if(Auth::user()->roles == 0 && $registro->id > 5)
 				<div class="card-action text-right m-3 mt-0 pt-3 border-top">
-					@if($registro->id > 5)
 					<a class="btn btn-outline-danger btn-small pl-5 pr-5 btnExcluir" data-id="{{$registro->id}}">Deletar</a>
-					@endif
 					<a class="btn btn-outline-secondary btn-small pl-5 pr-5" href="{{route('editar_noticia', $registro->id)}}">Editar</a>
 				</div>
 				@endif
 				@else
 				<div class="m-3"></div>
 				@endauth
-
 			</div>
 			<!--Card-->
 			@endforeach

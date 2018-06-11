@@ -28,6 +28,7 @@ class CreateProdutosTable extends Migration
             $table->integer('idpessoa')->unsigned()->references('id')->on('pessoa');
             $table->integer('idorganizacao')->unsigned()->nullable()->references('id')->on('organizacao');
             $table->integer('idchat')->unsigned()->nullable()->references('id')->on('chat');
+            $table->binary('foto')->nullable();
             $table->timestamps();
         });
     }

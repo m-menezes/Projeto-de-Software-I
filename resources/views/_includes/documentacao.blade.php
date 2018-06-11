@@ -16,35 +16,26 @@
 					<a target="blank" href="https://github.com/m-menezes/Projeto-de-Software-I">GitHub</a>
 				</li>
 				<li>
-					<a target="blank" href="#">Documento DRS</a>
+					<a target="blank" href="https://drive.google.com/file/d/1R5NfDxujXKeZx_0cruH-ksbomzn0v1-F/view?usp=sharing">Documento DRS</a>
 				</li>
 				<li>
-					<a target="blank" href="#">UML</a>
+					<a target="blank" href="https://drive.google.com/file/d/1t-w-RxjRMTVWIxoIFqsMjJvT4JuqPR94/view?usp=sharing">Diagrama de caso de uso</a>
 				</li>
 				<li>
-					<a target="blank" href="#">Diagrama de classes</a>
+					<a target="blank" href="https://drive.google.com/file/d/1ETpH0lRksE0cR5yObxXnGm7UXeNkpsOv/view?usp=sharing">Diagrama de classes</a>
 				</li>
 				<li>
-					<a target="blank" href="#">Diagrama de Sequências</a>
+					<a target="blank" href="https://drive.google.com/file/d/1f6w-peYeaHG3M6ErhEhm30ZymtiKHXMI/view?usp=sharing">Diagrama de Sequências</a>
 				</li>
 				<li>
-					<a target="blank" href="#">Modelagem de Estados</a>
+					<a target="blank" href="https://drive.google.com/file/d/1ZBM-OVCCBzoev8HuUugdSXVhDmMI1Ee3/view?usp=sharing">Modelagem de Estados</a>
 				</li>
 				<li>
-					<a target="blank" href="#">Modelagem de Atividades</a>
+					<a target="blank" href="https://drive.google.com/file/d/17BiB4tl_fQptFZkTOIv7h_5JX4I2yWH2/view?usp=sharing">Modelagem de Atividades</a>
 				</li>
 				<li>
-					<a target="blank" href="#">Modelo de Implementação</a>
-				</li>
-				<li>
-					<a target="blank" href="#">Modelo de Implantação</a>
-				</li>
-				<li>
-					<a target="blank" href="#">Modelagem conceitual da base de dados</a>
-				</li>
-				<li>
-					<a target="blank" href="#">Uso de técnicas para desenvolvimento de IHC com ferramentas de Prototipação de Interfaces</a>
-				</li>
+					<a target="blank" href="https://drive.google.com/file/d/1xCtSMa8KtqXDQsuN_2F0MREk8XU-8qra/view?usp=sharing">Modelo de Implementação</a>
+				</li>				
 			</ul>
 		</div>
 	</div>

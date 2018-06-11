@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\File;
 use App\Noticia;
 use App\User;
 use App\Organizacao;
@@ -79,6 +80,12 @@ class SmartRecycleController extends Controller{
 			return redirect()->back()->withInput()->withErrors($validator->messages());
 		}
 		else{
+			if(isset($request['foto'])){
+				$file = $request['foto'];
+				$name = $file->getPathName();
+				$file = base64_encode(file_get_contents($name));
+				$request['foto'] = 'data:image/jpg;base64,'.$file;
+			}
 			$chat = Chat::create();
 			$request['status'] = 'Disponivel';
 			$request['idpessoa'] = Auth::user()->idroles;
@@ -94,13 +101,29 @@ class SmartRecycleController extends Controller{
 
 	public function update_produto(Request $req, $id){
 		$dados = $req->all(); 
+		if(isset($dados['foto'])){
+			$file = $dados['foto'];
+			$name = $file->getPathName();
+			$file = base64_encode(file_get_contents($name));
+			$dados['foto'] = 'data:image/jpg;base64,'.$file;
+		}
 		Produto::find($id)->update($dados);
 		return redirect()->route('produto');
+	}
+	public function foto_produto($id){
+		$produto = Produto::find($id);
+		$produto->foto = NULL;
+		$produto->save();
+		return redirect()->back();
 	}
 
 	public function status_produto($id){
 		$dataservidor = new DateTime();
 		$produto = Produto::find($id);
+		// Reset das mensagens do chat
+		$chat = Chat::find($produto->idchat);
+		$chat->texto = NULL;
+		$chat->save();
 		if($produto->status == 'Disponivel'){
 			$produto->status = 'Reservado';
 			$produto->idorganizacao = Auth::user()->idroles;
@@ -128,11 +151,29 @@ class SmartRecycleController extends Controller{
 		return redirect()->route('produto');
 	}
 
-
 	public function chat_produto($id){
-		$chat = Chat::where('id', $id)->get()[0];
-		return view('dashboard.produto-chat', compact('chat', 'id'));
+		$produto = Produto::find($id);
+		$usuario = Auth::user();
+		if($usuario->roles < 2){
+			if($usuario->idroles == $produto->idpessoa){
+				$chat = Chat::where('id', $id)->get()[0];
+				return view('dashboard.produto-chat', compact('chat', 'id'));
+			}
+			else{
+				return redirect()->back();
+			}
+		}
+		else{
+			if($usuario->idroles == $produto->idorganizacao){
+				$chat = Chat::where('id', $id)->get()[0];
+				return view('dashboard.produto-chat', compact('chat', 'id'));
+			}
+			else{
+				return redirect()->back();
+			}
+		}
 	}
+
 	public function chat_update(Request $req, $id){
 		$dataservidor = new DateTime();
 		$data = $dataservidor->format('d-m-y H:i');
@@ -159,6 +200,12 @@ class SmartRecycleController extends Controller{
 		return redirect()->back();
 	}
 
+
+	public function chat_get(Request $id){
+		$id = $id->all();
+		$chat = Chat::where('id', $id["id"])->select('texto')->get()->toArray()[0];
+		return($chat);
+	}
 
 
 

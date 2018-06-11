@@ -32,10 +32,12 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::post('/produto/adicionar', 			['as' => 'create_produto', 		'uses' => 'SmartRecycleController@create_produto']);
 	Route::get('/produto/deletar/{id}', 		['as' => 'delete_produto', 		'uses' => 'SmartRecycleController@delete_produto']);
 	Route::get('/produto/editar/{id}', 			['as' => 'editar_produto', 		'uses' => 'SmartRecycleController@editar_produto']);
-	Route::get('/produto/update/{id}', 			['as' => 'update_produto', 		'uses' => 'SmartRecycleController@update_produto']);
+	Route::post('/produto/update/{id}', 			['as' => 'update_produto', 		'uses' => 'SmartRecycleController@update_produto']);
+	Route::get('/produto/remove/foto/{id}', 	['as' => 'foto_produto', 		'uses' => 'SmartRecycleController@foto_produto']);
 	Route::get('/produto/status/{id}',	 		['as' => 'status_produto', 		'uses' => 'SmartRecycleController@status_produto']);
 	Route::get('/produto/chat/{id}',	 		['as' => 'chat_produto', 		'uses' => 'SmartRecycleController@chat_produto']);
-	Route::get('/produto/chat/update/{id}',	['as' => 'chat_update', 		'uses' => 'SmartRecycleController@chat_update']);
+	Route::get('/produto/msgs',	 				['as' => 'chat_get', 			'uses' => 'SmartRecycleController@chat_get']);
+	Route::get('/produto/chat/update/{id}',		['as' => 'chat_update', 		'uses' => 'SmartRecycleController@chat_update']);
 	/*EDITAR CONTA*/
 	Route::get('/conta/editar/{id}',	 		['as' => 'editar_conta', 		'uses' => 'SmartRecycleController@editar_conta']);
 	Route::get('/conta/update/{id}/senha',	 	['as' => 'update_senha', 		'uses' => 'SmartRecycleController@update_senha']);

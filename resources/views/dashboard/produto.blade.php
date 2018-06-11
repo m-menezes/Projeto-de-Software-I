@@ -17,7 +17,7 @@
 			@foreach($registros as $registro)
 			<?php $cor = ($registro->status == 'Reservado') ? 'danger' : 'info'; ?>
 			<div class="card my-2 w-100" id="card-{{$registro->id}}" style="border-color: <?php echo ($registro->datareserva == NULL) ? '#17a2b8' : 'red'; ?>;">
-				<div class="card-body">
+				<div class="card-body pb-0 ">
 					@if($registro->idorganizacao != NULL)
 					<div class="{{$cor}}-ribbon">Reservado</div>
 					@else
@@ -30,9 +30,11 @@
 									<h5 class="d-inline weight-300 card-title">{{$registro->produto}}</h5>
 								</div>
 								<div class="col-md-5 text-sm-center text-md-right pt-2">
+									@if(isset($registro->tipo))
 									<span tabindex="0" class="m-1 text-{{$cor}}" role="button" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Tipo: {{$registro->tipo}}">
 										<i class="fas fa-recycle"></i>
 									</span>
+									@endif
 									<span tabindex="0" class="m-1 text-{{$cor}}" role="button" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Usuário: {{ucfirst($registro->user_name)}}">
 										<i class="far fa-user"></i>
 									</span>
@@ -55,16 +57,13 @@
 									</span>
 								</div>
 							</div>
-							<div class="row">
+							<div class="row my-2">
 								<p>{{str_limit($registro->descricao, 350, $end = ' [...]')}}</p>
 								@if((Auth::user()->idroles == $registro->idorganizacao) || (Auth::user()->idroles == $registro->idpessoa && Auth::user()->roles != 2))
-								<p><strong>Contato do Usuário: </strong>{{$registro->user_email}}</p>
+								<p class="m-0"><strong>Contato do Usuário: </strong>{{$registro->user_email}}</p>
 								@endif
 								@if($registro->idorganizacao && Auth::user()->idroles == $registro->idpessoa && Auth::user()->roles != 2)
-								<p><strong>Contato da empresa: </strong>{{$registro->org_telefone}}</p>
-								@endif
-								@if($registro->datareserva != NULL)
-								<a class="btn btn-outline-info" id="chat{{$registro->id}}" href="{{route('chat_produto', $registro->idchat)}}">Chat</a>
+								<p class="m-0"><strong>Contato da empresa: </strong>{{$registro->org_telefone}}</p>
 								@endif
 							</div>
 						</div>
@@ -78,20 +77,31 @@
 								@endif
 								<strong>CEP: </strong>{{$registro->cep}}<br>
 							</p>
-							<div class="row">
-								@if(Auth::user()->roles != 2 && (Auth::user()->roles == 0 || $registro->idpessoa == Auth::user()->idroles) )
-								<a class="btn btn-outline-danger mr-2 btnExcluir" data-id="{{$registro->id}}">Deletar</a>
-								@if($registro->status == 'Disponivel')
-								<a class="btn btn-outline-secondary" href="{{route('editar_produto', $registro->id)}}">Editar Produto</a>
-								@else
-								<a class="btn btn-outline-{{$cor}}" id="status{{$registro->id}}" href="{{route('status_produto', $registro->id)}}"><?php echo ($registro->status == 'Reservado') ? 'Cancelar Reserva' : 'Reservar' ?></a>
-								@endif
-								@endif
-								@if(Auth::user()->roles == 2)
-								<a class="btn btn-outline-{{$cor}}" id="status{{$registro->id}}" href="{{route('status_produto', $registro->id)}}"><?php echo ($registro->status == 'Reservado') ? 'Cancelar Reserva' : 'Reservar' ?></a>
-								@endif
-							</div>
-
+							
+						</div>
+					</div>
+					<div class="card-footer bg-transparent border-{{$cor}}">
+						@if(Auth::user()->roles != 2 && (Auth::user()->roles == 0 || $registro->idpessoa == Auth::user()->idroles) )
+							<a href="#"	class="text-danger mr-3 p-3 btnExcluir" data-id="{{$registro->id}}">Deletar</a>
+							@if($registro->status == 'Disponivel')
+								<a class="mr-3 p-3 text-secondary" href="{{route('editar_produto', $registro->id)}}">Editar Produto</a>
+							@else
+								<a class="mr-3 p-3 text-{{$cor}}" id="status{{$registro->id}}" href="{{route('status_produto', $registro->id)}}"><?php echo ($registro->status == 'Reservado') ? 'Cancelar Reserva' : 'Reservar' ?></a>
+							@endif
+						@endif
+						@if(Auth::user()->roles == 2)
+							<a class="text-{{$cor}} mr-3 p-3" id="status{{$registro->id}}" href="{{route('status_produto', $registro->id)}}"><?php echo ($registro->status == 'Reservado') ? 'Cancelar Reserva' : 'Reservar' ?></a>
+						@endif
+						@if($registro->datareserva != NULL)
+							<a class="text-success mr-3 p-3" id="chat{{$registro->id}}" href="{{route('chat_produto', $registro->idchat)}}">Enviar Mensagem</a>
+						@endif
+						@if(isset($registro->foto))
+						<a class="text-info mr-3 p-3" data-toggle="collapse" href="#collapsefoto-{{$registro->id}}" role="button" aria-expanded="false" aria-controls="collapsefoto-{{$registro->id}}">Foto</a>
+						@endif
+					</div>
+					<div class="collapse" id="collapsefoto-{{$registro->id}}">
+						<div class="mb-4" style="text-align: center;">
+							<img src="{{$registro->foto}}">
 						</div>
 					</div>
 				</div>
@@ -134,7 +144,7 @@
 	color: #FFF;
 	padding: 7px 20px;
 	position: absolute;
-	bottom: 10px;
+	top: 10px;
 	right: -1px;
 }
 .blue-ribbon:before {
@@ -154,7 +164,7 @@
 	color: #FFF;
 	padding: 7px 20px;
 	position: absolute;
-	bottom: 10px;
+	top: 10px;
 	right: -1px;
 }
 .danger-ribbon:before {
