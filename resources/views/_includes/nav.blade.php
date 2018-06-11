@@ -18,7 +18,7 @@
 					<a class="dropdown-item" href="{{route('register_org')}}">Organização</a>
 				</div>
 			@else
-				<a class="nav-item nav-link" href="{{route('produto')}}">Produto</a>
+				<a class="nav-item nav-link" href="{{route('produto')}}">Produtos</a>
 				@if (Auth::user()->roles == 0)
 				<!-- MENU DE SUPERADMIN -->
 				<a class="nav-item nav-link" href="{{route('lista_users')}}">Lista de Usuarios</a>
@@ -41,6 +41,7 @@
 		<div class="dropdown badge-user">
 			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown_user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Auth::user()->email}}</button>
 			<div class="dropdown-menu" aria-labelledby="dropdown_user">
+				<li><a class="dropdown-item" href="{{route('editar_conta', Auth::user()->id)}}">Editar Conta</a></li>
 				<li><a class="dropdown-item" href="{{route('logout')}}">Logout</a></li>
 			</div>
 		</div>

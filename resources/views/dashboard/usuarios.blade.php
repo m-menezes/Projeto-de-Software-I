@@ -19,30 +19,21 @@
 			</thead>
 			<tbody>
 				@foreach($usuarios as $usuario)
-				<?php 
-				switch ($usuario->roles) {
-					case 0:
-					$nivel = 'SuperAdmin';
-					$class = 'table-warning';
-					break;
-					case 1:
-					$nivel = 'Usuário';
-					$class = '';
-					break;
-					case 2:
-					$nivel = 'Organização';
-					$class = '';
-					break;
-					default:
-					$nivel = 'Error';
-					$class = 'table-danger';
-					break;
-				}
-				?>
-				<tr class="{{$class}}">
+				<tr>
 					<td>{{$usuario->id}}</td>
 					<td>{{$usuario->name}}</td>
-					<td>{{$nivel}}</td>
+					@if($usuario->id != 1)
+					<td>
+						<div class="input-group">
+							<select class="custom-select" id="userroles" data-id="{{$usuario->users_id}}">
+								<option value="0" <?php echo ($usuario->roles == 0) ? "selected" : ""; ?>>SuperAdmin</option>
+								<option value="1" <?php echo ($usuario->roles == 1) ? "selected" : ""; ?>>Usuário</option>
+							</select>
+						</div>
+					</td>
+					@else
+					<td>SuperAdmin</td>
+					@endif
 					<td>{{$usuario->email}}</td>
 					<td>{{$usuario->endereco}}</td>
 					<td>{{$usuario->telefone}}</td>
@@ -87,7 +78,7 @@
 					break;
 				}
 				?>
-				<tr class="{{$class}}">
+				<tr>
 					<td>{{$organizacao->id}}</td>
 					<td>{{$organizacao->name}}</td>
 					<td>{{$nivel}}</td>
@@ -102,4 +93,25 @@
 		</table>
 	</div>
 </div>
+<script>
+	$(document).on('change', '#userroles', function() {
+		altera_status( $(this).data('id') , $(this).val() );
+	});
+	function altera_status(id, value){
+		$.ajax({
+			type:"GET",
+			url:"{{route('roles_users')}}",
+			data: {
+				id : id,
+				value : value,
+			},  
+			success: function(retorno) {
+				location.reload();
+			},
+			error: function(retorno){
+				console.log(retorno);
+			},
+		});
+	}
+</script>
 @endsection
