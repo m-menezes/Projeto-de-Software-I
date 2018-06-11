@@ -24,13 +24,13 @@
 <h5 class="col-12 weight-300">LOCALIZAÇÃO</h5>
 <div class="row">
 	<div class="form-group col-3">
-		<input name="cep" type="text" required class="form-control" id="cep" placeholder="CEP" value="<?php echo (isset($registro->cep)) ? $registro->cep : ''; ?>">
+		<input name="cep" type="number" required class="form-control" id="cep" placeholder="CEP" value="<?php echo (isset($registro->cep)) ? $registro->cep : ''; ?>">
 	</div>
 	<div class="form-group col-7">
 		<input name="endereco" type="text" required class="form-control" id="endereco" placeholder="Endereço" value="<?php echo (isset($registro->endereco)) ? $registro->endereco : ''; ?>">
 	</div>
 	<div class="form-group col-2">
-		<input name="numero" type="text" required class="form-control" id="numero" placeholder="Nº" value="<?php echo (isset($registro->numero)) ? $registro->numero : ''; ?>">
+		<input name="numero" type="number" required class="form-control" id="numero" placeholder="Nº" value="<?php echo (isset($registro->numero)) ? $registro->numero : ''; ?>">
 	</div>
 </div>
 <div class="row">
@@ -39,5 +39,16 @@
 	</div>
 	<div class="form-group col-6">
 		<input name="complemento" type="text" class="form-control" id="complemento" placeholder="Complemento" value="<?php echo (isset($registro->complemento)) ? $registro->complemento : ''; ?>">
+	</div>
+</div>
+<h5 class="col-12 weight-300">FOTO</h5>
+<div class="row">
+	<div class="form-group col-12">
+		@if(isset($registro->foto))
+		<img src="{{$registro->foto}}" width="200px">
+		<a class="btn btn-outline-danger" href="{{route('foto_produto', $registro->id)}}">Remover Imagem</a>
+		@else
+		<input class="form-control-file" type="file" name="foto" id="foto" accept="image/*">
+		@endif
 	</div>
 </div>

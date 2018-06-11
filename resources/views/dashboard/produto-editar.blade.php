@@ -4,7 +4,7 @@
 @include('_includes.titulo')
 <div class="container">
 	<div class="m-4">
-		<form class="m-3" method="get" action="{{route('update_produto', $registro->id)}}" enctype="multipart/form-data">
+		<form class="m-3" method="POST" action="{{route('update_produto', $registro->id)}}" enctype="multipart/form-data">
 			{{ csrf_field() }}
 			<!-- PRODUTO -->
 			<h5 class="col-12 weight-300">PRODUTO</h5>

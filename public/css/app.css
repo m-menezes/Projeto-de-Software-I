@@ -288,6 +288,9 @@ footer{
   z-index: 99;
   cursor: pointer;
 }
+.btn_excluir{
+	cursor: pointer;
+}
 #button_topo .fa-chevron-circle-up{
 	color: #28a745;
 }
