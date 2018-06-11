@@ -20,6 +20,7 @@ public function run(){
 		'bairro' => 'centro',
 		'status' => 'Disponivel',
 		'idpessoa' => '1',
+		'idchat' => '1',
 	]);
 	Produto::create([
 		'produto' => 'Vidro',
@@ -30,6 +31,7 @@ public function run(){
 		'bairro' => 'centro',
 		'status' => 'Disponivel',
 		'idpessoa' => '1',
+		'idchat' => '2',
 	]);
 }
 }

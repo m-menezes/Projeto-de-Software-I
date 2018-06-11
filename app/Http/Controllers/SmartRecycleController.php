@@ -9,13 +9,14 @@ use App\User;
 use App\Organizacao;
 use App\Produto;
 use App\Pessoa;
+use App\Chat;
 use DateTime;
 Use Auth;
 
 
 class SmartRecycleController extends Controller{
 	public function index(){
-		$noticias = Noticia::orderBy('created_at', 'DESC')->get();
+		$noticias = Noticia::orderBy('created_at', 'DESC')->limit(6)->get();
 		$registros = Produto::orderBy('created_at', 'DESC')
 		->where('produtos.status', '=', 'Disponivel')
 		->limit(5)
@@ -78,8 +79,10 @@ class SmartRecycleController extends Controller{
 			return redirect()->back()->withInput()->withErrors($validator->messages());
 		}
 		else{
+			$chat = Chat::create();
 			$request['status'] = 'Disponivel';
 			$request['idpessoa'] = Auth::user()->idroles;
+			$request['idchat'] = $chat->id;
 			Produto::create($request);
 			return redirect()->route('produto');
 		}
@@ -124,6 +127,44 @@ class SmartRecycleController extends Controller{
 		}
 		return redirect()->route('produto');
 	}
+
+
+	public function chat_produto($id){
+		$chat = Chat::where('id', $id)->get()[0];
+		return view('dashboard.produto-chat', compact('chat', 'id'));
+	}
+	public function chat_update(Request $req, $id){
+		$dataservidor = new DateTime();
+		$data = $dataservidor->format('d-m-y H:i');
+
+		$request = $req->all();
+		$mensagem = array();
+		$chat = Chat::find($id);
+
+		if($chat->texto == NULL){
+			$array_msg = array("usuario"=>Auth::user()->id, "hora"=>$data, "mensagem"=>$request['message']);
+			array_push($mensagem, $array_msg);
+			$string_array = json_encode($mensagem);
+			$chat->texto = $string_array;
+			$chat->save();
+		}
+		else{
+			$mensagem = json_decode($chat->texto, true);
+			$array_msg = array("usuario"=>Auth::user()->id, "hora"=>$data, "mensagem"=>$request['message']);
+			array_push($mensagem, $array_msg);
+			$string_array = json_encode($mensagem);
+			$chat->texto = $string_array;
+			$chat->save();
+		}
+		return redirect()->back();
+	}
+
+
+
+
+
+
+
 
 	public function editar_conta($id){
 		if(Auth::user()->id != $id){

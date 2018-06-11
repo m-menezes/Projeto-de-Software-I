@@ -19,11 +19,15 @@ class Produto extends Model
         'idorganizacao',
         'status',/*Disponivel, Reservado, Concluido*/
         'datareserva',
+        'idchat',
     ];
     public function idpessoa(){
         return $this->hasOne('App\Pessoa');
     }
     public function idorganizacao(){
         return $this->hasOne('App\Organizacao');
+    }
+    public function idchat(){
+        return $this->hasOne('App\Chat');
     }
 }
