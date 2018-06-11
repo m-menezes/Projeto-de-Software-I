@@ -63,6 +63,9 @@
 								@if($registro->idorganizacao && Auth::user()->idroles == $registro->idpessoa && Auth::user()->roles != 2)
 								<p><strong>Contato da empresa: </strong>{{$registro->org_telefone}}</p>
 								@endif
+								@if($registro->datareserva != NULL)
+								<a class="btn btn-outline-info" id="chat{{$registro->id}}" href="{{route('chat_produto', $registro->idchat)}}">Chat</a>
+								@endif
 							</div>
 						</div>
 						<div class="col-md-5">
