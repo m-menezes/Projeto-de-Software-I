@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Produto;
+use DateTime;
 
 class ReservaCron extends Command
 {
@@ -38,14 +39,18 @@ class ReservaCron extends Command
      */
     public function handle(){
         $date = new DateTime();
-        $date->modify('-1 day');
+        $date = $date->modify('-1 day');
         $Produtos = Produto::all();
         foreach ($Produtos as $produto) {
-            if($date > ($produto->datareserva)){
-                $produto->status = 'Disponivel';
-                $produto->idorganizacao = NULL;
-                $produto->datareserva = NULL;
-                $produto->update();
+            if($produto->datareserva){
+                $datareserva = new DateTime($produto->datareserva);
+                if($date == $datareserva){
+                // if(1 == 1){
+                    $produto->status = 'Disponivel';
+                    $produto->idorganizacao = NULL;
+                    $produto->datareserva = NULL;
+                    $produto->update();
+                }
             }
         }
     }

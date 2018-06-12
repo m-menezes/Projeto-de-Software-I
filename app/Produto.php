@@ -20,7 +20,8 @@ class Produto extends Model
         'status',/*Disponivel, Reservado, Concluido*/
         'datareserva',
         'idchat',
-        'foto',
+        'imagem_name',
+        'imagem_path',
     ];
     public function idpessoa(){
         return $this->hasOne('App\Pessoa');

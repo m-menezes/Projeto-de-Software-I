@@ -10,7 +10,7 @@
 					<a target="blank" href="https://docs.google.com/document/d/1yucG_zM8taIkwiGczdPCMCtFZ2lFa0HopXJjZEEbS5k/edit">Documento de visão</a>
 				</li>
 				<li>
-					<a target="blank" href="https://drive.google.com/open?id=1VJxM8_fnynJpm_jBieufWc-e_6b6Xerp">Diagrama EER</a>
+					<a target="blank" href="https://drive.google.com/file/d/1vgn7LTshjYFISqO7nYPCoBmt3Bf1dlXQ/view?usp=sharing">Diagrama EER</a>
 				</li>
 				<li>
 					<a target="blank" href="https://github.com/m-menezes/Projeto-de-Software-I">GitHub</a>
