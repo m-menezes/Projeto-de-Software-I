@@ -44,11 +44,11 @@
 <h5 class="col-12 weight-300">FOTO</h5>
 <div class="row">
 	<div class="form-group col-12">
-		@if(isset($registro->foto))
-		<img src="{{$registro->foto}}" width="200px">
+		@if(isset($registro->imagem_path))
+		<img src="{{$registro->imagem_path}}" width="200px">
 		<a class="btn btn-outline-danger" href="{{route('foto_produto', $registro->id)}}">Remover Imagem</a>
 		@else
-		<input class="form-control-file" type="file" name="foto" id="foto" accept="image/*">
+		<input class="form-control-file" type="file" name="imagem" id="foto" accept="image/*">
 		@endif
 	</div>
 </div>

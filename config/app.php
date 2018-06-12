@@ -3,6 +3,8 @@
 return [
     'noticias_storage' => env('STORAGE_NEWS'),
     'noticias_storage_save' => env('STORAGE_NEWS_SAVE'),
+    'produto_storage' => env('STORAGE_PRODUTO'),
+    'produto_storage_save' => env('STORAGE_PRODUTO_SAVE'),
 
     /*
     |--------------------------------------------------------------------------

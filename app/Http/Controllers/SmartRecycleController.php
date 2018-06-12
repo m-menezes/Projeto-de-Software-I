@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
 use App\Noticia;
 use App\User;
@@ -24,6 +27,7 @@ class SmartRecycleController extends Controller{
 		->get();
 		return view('index', compact( ['noticias', 'registros'] ));
 	}
+	
 	public function lista_users(){
 		$organizacoes = User::join('organizacaos', 'users.idroles', '=', 'organizacaos.id')
 		->where('roles', '=', '2')
@@ -36,6 +40,7 @@ class SmartRecycleController extends Controller{
 		->get();
 		return view('dashboard.usuarios', compact( ['usuarios', 'organizacoes'] ));
 	}
+
 	public function produto(){
 		if(Auth::user()->roles == 0 || Auth::user()->roles == 2){
 			$registros =  Produto::join('pessoas', 'produtos.idpessoa', '=', 'pessoas.id')
@@ -80,11 +85,11 @@ class SmartRecycleController extends Controller{
 			return redirect()->back()->withInput()->withErrors($validator->messages());
 		}
 		else{
-			if(isset($request['foto'])){
-				$file = $request['foto'];
-				$name = $file->getPathName();
-				$file = base64_encode(file_get_contents($name));
-				$request['foto'] = 'data:image/jpg;base64,'.$file;
+			if($req->file('imagem')){
+				$file = $req->file('imagem');
+				$request['imagem_name'] = time(). '.' .$file->getClientOriginalExtension();
+				$request['imagem_path'] = config('app.produto_storage').'/'.$request['imagem_name'];
+				$file->move(config('app.produto_storage_save'), $request['imagem_name']);
 			}
 			$chat = Chat::create();
 			$request['status'] = 'Disponivel';
@@ -101,18 +106,28 @@ class SmartRecycleController extends Controller{
 
 	public function update_produto(Request $req, $id){
 		$dados = $req->all(); 
-		if(isset($dados['foto'])){
-			$file = $dados['foto'];
-			$name = $file->getPathName();
-			$file = base64_encode(file_get_contents($name));
-			$dados['foto'] = 'data:image/jpg;base64,'.$file;
+		$antigo = Produto::find($id);
+		if($req->file('imagem')){
+			$file = $req->file('imagem');
+			$antigo['imagem_name'] = time(). '.' .$file->getClientOriginalExtension();
+			$file->move(config('app.produto_storage_save'), $antigo['imagem_name']);
+			if($antigo['imagem_path']){
+				$arquivo = (array_reverse(explode('/', $antigo['imagem_path'])))[0];
+				unlink(config('app.produto_storage_save').'/'.$arquivo);
+			}
+			$antigo['imagem_path'] = config('app.produto_storage').'/'.$antigo['imagem_name'];
 		}
-		Produto::find($id)->update($dados);
+		$antigo->update();
 		return redirect()->route('produto');
 	}
 	public function foto_produto($id){
 		$produto = Produto::find($id);
-		$produto->foto = NULL;
+		if($produto['imagem_path']){
+			$arquivo = (array_reverse(explode('/', $produto['imagem_path'])))[0];
+			unlink(config('app.produto_storage_save').'/'.$arquivo);
+		}
+		$produto->imagem_name = NULL;
+		$produto->imagem_path = NULL;
 		$produto->save();
 		return redirect()->back();
 	}

@@ -12,7 +12,7 @@
 <div class="container">
 	@foreach($registros as $registro)
 	<?php $cor = ($registro->status == 'Reservado') ? 'danger' : 'info'; ?>
-	<div class="card my-2 w-100" id="card-{{$registro->id}}" style="border-color: <?php echo ($registro->datareserva == NULL) ? '#17a2b8' : 'red'; ?>;">
+	<div class="card my-3 w-100" id="card-{{$registro->id}}" style="border-color: <?php echo ($registro->datareserva == NULL) ? '#17a2b8' : 'red'; ?>;">
 		<div class="card-body">
 			@if($registro->idorganizacao != NULL)
 			<div class="{{$cor}}-ribbon">Reservado</div>
@@ -78,7 +78,7 @@
 		<h1 class="block-title weight-300">Notícias</h1>
 	</div>
 </div>
-<div class="container p-0 mt-5">
+<div class="container p-0 my-5">
 	<div class="row">
 		<div class="card-columns">
 			@foreach($noticias as $noticia)
@@ -116,7 +116,7 @@
 	color: #FFF;
 	padding: 7px 20px;
 	position: absolute;
-	bottom: 10px;
+	top: 10px;
 	right: -1px;
 }
 .blue-ribbon:before {
@@ -136,7 +136,7 @@
 	color: #FFF;
 	padding: 7px 20px;
 	position: absolute;
-	bottom: 10px;
+	top: 10px;
 	right: -1px;
 }
 .danger-ribbon:before {
