@@ -20,7 +20,7 @@
 			<div class="blue-ribbon">Disponivel</div>
 			@endif
 			<div class="row">
-				<div class="col-md-8">
+				<div class="col-md-7">
 					<div class="row">
 						<div class="col-md-7 text-sm-center text-md-left px-0">
 							<h5 class="d-inline weight-300 card-title">{{$registro->produto}}</h5>
@@ -47,7 +47,7 @@
 						<p style="width: 100%;">{{str_limit($registro->descricao, 350, $end = ' [...]')}}</p>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-5">
 					<p>
 						<strong>Endereço: </strong>{{$registro->endereco}}<br>
 						<strong>Nº: </strong>{{$registro->numero}}<br>
@@ -116,7 +116,7 @@
 	color: #FFF;
 	padding: 7px 20px;
 	position: absolute;
-	top: 10px;
+	bottom: 5px;
 	right: -1px;
 }
 .blue-ribbon:before {
@@ -136,7 +136,7 @@
 	color: #FFF;
 	padding: 7px 20px;
 	position: absolute;
-	top: 10px;
+	bottom: 5px;
 	right: -1px;
 }
 .danger-ribbon:before {
