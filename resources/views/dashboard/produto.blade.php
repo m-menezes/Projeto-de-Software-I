@@ -15,7 +15,7 @@
 		@endif
 		<div class="row mx-3">
 			@foreach($registros as $registro)
-			<?php if($registro->datareserva != NULL && $registro->idorganizacao != Auth::user()->idroles) {
+			<?php if($registro->datareserva != NULL && (Auth::user()->roles == 2  && $registro->idorganizacao != Auth::user()->idroles)) {
 				continue;
 			} ?>
 			<?php $cor = ($registro->status == 'Reservado') ? 'danger' : 'info'; ?>
@@ -98,7 +98,7 @@
 						@if(isset($registro->imagem_path))
 						<a class="text-info mr-3 p-3" data-toggle="collapse" href="#collapsefoto-{{$registro->id}}" role="button" aria-expanded="false" aria-controls="collapsefoto-{{$registro->id}}">Foto</a>
 						@endif
-						@if(($registro->datareserva != NULL && Auth::user()->idroles == $registro->idpessoa) || ($registro->datareserva != NULL && Auth::user()->idroles == $registro->idorganizacao))
+						@if(($registro->datareserva != NULL && Auth::user()->idroles == $registro->idpessoa) || ($registro->datareserva != NULL && Auth::user()->roles == 2 && Auth::user()->idroles == $registro->idorganizacao))
 							<a class="text-success mr-3 p-3" id="chat{{$registro->id}}" href="{{route('chat_produto', $registro->idchat)}}">Enviar Mensagem</a>
 						@endif
 					</div>
@@ -147,7 +147,7 @@
 	color: #FFF;
 	padding: 7px 20px;
 	position: absolute;
-	top: 10px;
+	bottom: 5px;
 	right: -1px;
 }
 .blue-ribbon:before {
@@ -167,7 +167,7 @@
 	color: #FFF;
 	padding: 7px 20px;
 	position: absolute;
-	top: 10px;
+	bottom: 5px;
 	right: -1px;
 }
 .danger-ribbon:before {

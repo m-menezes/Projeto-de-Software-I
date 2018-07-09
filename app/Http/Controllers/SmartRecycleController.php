@@ -42,21 +42,22 @@ class SmartRecycleController extends Controller{
 	}
 
 	public function produto(){
-		if(Auth::user()->roles == 0 || Auth::user()->roles == 2){
-			$registros =  Produto::join('pessoas', 'produtos.idpessoa', '=', 'pessoas.id')
-			->leftjoin('organizacaos', 'produtos.idorganizacao', '=', 'organizacaos.id')
-			->join('users', 'produtos.idpessoa', '=', 'users.idroles')
-			->where('users.roles', '<', 2)
-			->select('produtos.*', 'pessoas.name as user_name', 'users.email as user_email', 'organizacaos.name as org_name', 'organizacaos.telefone as org_telefone')
-			->orderBy('created_at', 'DESC')
-			->get();
-			return view('dashboard.produto', compact( ['registros'] ));
-		}
-		else{
+		if(Auth::user()->roles == 1){
 			$registros = Produto::join('pessoas', 'produtos.idpessoa', '=', 'pessoas.id')
 			->leftjoin('organizacaos', 'produtos.idorganizacao', '=', 'organizacaos.id')
 			->join('users', 'produtos.idpessoa', '=', 'users.idroles')
 			->where('idpessoa', '=', Auth::user()->idroles, 'AND', 'users.roles', '<', 2 )
+			->select('produtos.*', 'pessoas.name as user_name', 'users.email as user_email', 'organizacaos.name as org_name', 'organizacaos.telefone as org_telefone')
+			->orderBy('created_at', 'DESC')
+			->get();
+			return view('dashboard.produto', compact( ['registros'] ));
+			
+		}
+		else{
+			$registros =  Produto::join('pessoas', 'produtos.idpessoa', '=', 'pessoas.id')
+			->leftjoin('organizacaos', 'produtos.idorganizacao', '=', 'organizacaos.id')
+			->join('users', 'produtos.idpessoa', '=', 'users.idroles')
+			->where('users.roles', '<', 2)
 			->select('produtos.*', 'pessoas.name as user_name', 'users.email as user_email', 'organizacaos.name as org_name', 'organizacaos.telefone as org_telefone')
 			->orderBy('created_at', 'DESC')
 			->get();
@@ -221,12 +222,6 @@ class SmartRecycleController extends Controller{
 		$chat = Chat::where('id', $id["id"])->select('texto')->get()->toArray()[0];
 		return($chat);
 	}
-
-
-
-
-
-
 
 	public function editar_conta($id){
 		if(Auth::user()->id != $id){

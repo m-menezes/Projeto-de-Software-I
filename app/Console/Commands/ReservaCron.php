@@ -39,18 +39,23 @@ class ReservaCron extends Command
      */
     public function handle(){
         $date = new DateTime();
-        $date = $date->modify('-1 day');
+        $date_atualizada = $date->modify('-1 day');
         $Produtos = Produto::all();
         foreach ($Produtos as $produto) {
             if($produto->datareserva){
                 $datareserva = new DateTime($produto->datareserva);
-                if($date == $datareserva){
+                if($date_atualizada > $datareserva){
                 // if(1 == 1){
                     $produto->status = 'Disponivel';
                     $produto->idorganizacao = NULL;
                     $produto->datareserva = NULL;
                     $produto->update();
+                    $log = '['. date_format($date, 'd-m-Y H:i') .'] - Reserva alterada - Produto: '.$produto->id.PHP_EOL;
                 }
+                else{
+                    $log = '['. date_format($date, 'd-m-Y H:i') .'] - Reserva não alterada - Produto: '.$produto->id.PHP_EOL;
+                }
+                echo $log;
             }
         }
     }
