@@ -26,10 +26,11 @@ SmartRecycle é um projeto para disciplina [ELC1073] - Projeto de Software I, co
 - Sqlite (Banco de dados)
 
 
-##### Necessario instalar
+##### Instalação
 - Apache
 - Php 7.0+
 - Sqlite3 driver
 - Rewrite apache
 - Composer
 - Utilizar SH Migrate para criação do banco base
+- Corrigir caminho no arquivo app/config
