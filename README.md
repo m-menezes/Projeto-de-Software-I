@@ -6,7 +6,7 @@
 SmartRecycle é um projeto para disciplina [ELC1073] - Projeto de Software I, com o objetivo de otimizar e gerenciar a da coleta de materiais recicláveis, facilitando o contato entre entidades de recebimento e interessados.<br>
 
 ##### Chat entre organização e usuário.
-- Foi criado um chat básico entre organização e usuário para facilitar a comuicação no momento da reserva.
+- Foi criado um chat básico entre organização e usuário para facilitar a comunicação no momento da reserva.
 
 ##### O sistema contará com níveis de usuários
 - Nível 0 - SuperAdmin
