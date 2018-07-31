@@ -1,10 +1,11 @@
 <?php
 
 return [
-    'noticias_storage' => env('STORAGE_NEWS'),
-    'noticias_storage_save' => env('STORAGE_NEWS_SAVE'),
-    'produto_storage' => env('STORAGE_PRODUTO'),
-    'produto_storage_save' => env('STORAGE_PRODUTO_SAVE'),
+    //NECESSARIO COMANDO STORAGE:LINK DO ARTISAN
+    'noticias_storage' => '/storage/noticias', // CAMINHO LARAVEL
+    'noticias_storage_save' => '/var/www/Projeto-de-Software-I/public/storage/noticias', //CAMINHO ABSOLUTO DA PASTA
+    'produto_storage' => '/storage/produtos', // CAMINHO LARAVEL
+    'produto_storage_save' => '/var/www/Projeto-de-Software-I/public/storage/produtos', //CAMINHO ABSOLUTO DA PASTA
 
     /*
     |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'SmartRecycle'),
+    'name' => 'SmartRecycle',
 
     /*
     |--------------------------------------------------------------------------
