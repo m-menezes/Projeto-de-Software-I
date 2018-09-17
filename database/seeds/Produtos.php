@@ -21,6 +21,7 @@ public function run(){
 		'status' => 'Disponivel',
 		'idpessoa' => '1',
 		'idchat' => '1',
+		'tipo' => 'Metal',
 	]);
 	Produto::create([
 		'produto' => 'Vidro',
@@ -28,6 +29,7 @@ public function run(){
 		'cep' => '97015513',
 		'endereco' => 'Presidente Vargas',
 		'numero' => '2043',
+		'tipo' => 'Vidro',
 		'bairro' => 'centro',
 		'status' => 'Disponivel',
 		'idpessoa' => '1',

@@ -7,9 +7,9 @@
 	<title>{{config('app.name')}}</title>
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<!--Imports CSS-->
-	<link href="/css/bootstrap.css?ver=1.1" rel="stylesheet" >
+	<link href="/css/bootstrap.css?ver=1.2" rel="stylesheet" >
 	<link href="/css/glyph.css" rel="stylesheet" >
-	<link href="/css/app.css?ver=2.01" rel="stylesheet">
+	<link href="/css/app.css?ver=<?php echo time(); ?>"rel="stylesheet">
 	<link href="/css/fileinput.css?ver=1.04" media="all" rel="stylesheet" type="text/css"/>
 	<link href="/themes/explorer-fa/theme.css" media="all" rel="stylesheet" type="text/css"/>
 	<link href="https://fonts.googleapis.com/css?family=Raleway:100,300,500,600" rel="stylesheet" type="text/css">
@@ -43,7 +43,7 @@
 		<div class="container">
 			<div class="row"> 
 				<div class="col-md-6 copyright copyright-left">
-					<small class="m-0">Marcelo || Zalem || Fabio || Laiser</small>
+					<!-- <small class="m-0">Marcelo || Zalem || Fabio || Laiser</small> -->
 				</div>
 				<div class="col-md-6 copyright copyright-right">
 					<small class="m-0"><i class="fas fa-recycle"></i> {{config('app.name')}}</small>
@@ -67,6 +67,17 @@
 		$('#button_topo').click(function(){
 			$('html, body').animate({scrollTop : 0},500);
 			return false;
+		});
+		$('.popover-dismiss').popover({
+			trigger: 'focus'
+		})
+
+		$('.btnExcluir').click(function(){
+			var id = $(this).attr('data-id');
+			var tipo = $(this).attr('data-tipo');
+			var par_url = "<?php echo  url('/').'/'; ?>" + tipo +  "<?php echo '/deletar'.'/'; ?>" + id;
+			$('#modalExcluir').modal('show');
+			$('#btnConfirmar').attr('href', par_url);
 		});
 		@yield('script')
 	</script>

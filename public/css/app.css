@@ -271,7 +271,7 @@ footer{
 .card-title a{
 	text-decoration: none;
 }
-.card-title a:after {
+h5.card-title a:after {
 	height: 0;
 	position: absolute;
 	bottom: 5px;
@@ -293,4 +293,86 @@ footer{
 }
 #button_topo .fa-chevron-circle-up{
 	color: #28a745;
+}
+.searchTerm {
+	float: left;
+	width: 100%;
+	border: 3px solid #28a745;
+	padding: 5px;
+	height: 50px;
+	border-radius: 5px;
+	outline: none;
+	color: #9DBFAF;
+}
+
+.searchTerm:focus{
+	color: black;
+}
+
+.searchButton {
+	position: absolute;
+	right: 15px;
+    width: 100px;
+    height: 50px;
+	border: 1px solid #28a745;
+	background: #28a745;
+	text-align: center;
+	color: #fff;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 23px;
+}
+.searchSelect{
+	position: absolute;
+    right: 115px;
+    top: 7px;
+    width: 220px;
+    height: 44px;
+    border: 1px solid #2fc351;
+    background: #2fc351;
+    text-align: center;
+    padding-left: 15px;
+    color: #fff;
+    font-size: 23px;
+    outline: unset;
+}
+.blue-ribbon {
+	background: #28a745;
+	color: #FFF;
+	padding: 7px 20px;
+	position: absolute;
+	bottom: 5px;
+	right: -1px;
+}
+.blue-ribbon:before {
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	content: "";
+	left: -12px;
+	border-top: 19px solid transparent;
+	border-right: 12px solid #28a745;
+	border-bottom: 19px solid transparent;
+	width: 0;
+}
+.danger-ribbon {
+	background: #dc3545;
+	color: #FFF;
+	padding: 7px 20px;
+	position: absolute;
+	bottom: 5px;
+	right: -1px;
+}
+.danger-ribbon:before {
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	content: "";
+	left: -12px;
+	border-top: 19px solid transparent;
+	border-right: 12px solid #dc3545;
+	border-bottom: 19px solid transparent;
+	width: 0;
 }

@@ -28,7 +28,7 @@
 				@auth
 				@if(Auth::user()->roles == 0 && $registro->id > 5)
 				<div class="card-action text-right m-3 mt-0 pt-3 border-top">
-					<a class="btn btn-outline-danger btn-small pl-5 pr-5 btnExcluir" data-id="{{$registro->id}}">Deletar</a>
+					<a class="btn btn-outline-danger btn-small pl-5 pr-5 btnExcluir" data-id="{{$registro->id}}" data-tipo="noticias">Deletar</a>
 					<a class="btn btn-outline-secondary btn-small pl-5 pr-5" href="{{route('editar_noticia', $registro->id)}}">Editar</a>
 				</div>
 				@endif
@@ -57,12 +57,4 @@
 		</div>
 	</div>
 </div>
-<script>
-	$('.btnExcluir').click(function(){
-		var id = $(this).attr('data-id');
-		var par_url = "<?php echo url('/noticias/deletar').'/'; ?>" + id;
-		$('#modalExcluir').modal('show');
-		$('#btnConfirmar').attr('href', par_url);
-	});
-</script>
 @endsection

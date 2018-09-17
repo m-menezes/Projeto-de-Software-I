@@ -8,6 +8,9 @@
 			@if (\Route::current()->getName() == 'home')
 			<a class="nav-item nav-link" href="#sobre">Sobre</a>
 			<a class="nav-item nav-link" href="#documentacao">Documentação</a>
+			@else
+			<a class="nav-item nav-link" href="\#sobre">Sobre</a>
+			<a class="nav-item nav-link" href="\#documentacao">Documentação</a>
 			@endif
 			<a class="nav-item nav-link" href="{{route('noticias')}}">Notícias</a>
 			@guest
@@ -33,8 +36,8 @@
 	<div class="navbar-nav">
 		<form class="form-inline my-2 my-lg-0" method="POST" action="{{route('doLogin')}}" >
 			{{ csrf_field() }}
-			<input name="email-user" type="email" class="form-control mr-sm-2" id="email-user" placeholder="Email">
-			<input name="password-user" type="password" class="form-control mr-sm-2" id="password-user" placeholder="Senha">
+			<input name="email-user" type="email" class="form-control mr-sm-2" id="email-user" placeholder="Email" required>
+			<input name="password-user" type="password" class="form-control mr-sm-2" id="password-user" placeholder="Senha" required>
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Entrar</button>
 		</form>
 		@else

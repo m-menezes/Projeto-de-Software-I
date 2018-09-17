@@ -27,6 +27,34 @@ class SmartRecycleController extends Controller{
 		->get();
 		return view('index', compact( ['noticias', 'registros'] ));
 	}
+
+	public function busca_produto(Request $req){
+		$search = $req['busca'];
+		$tipo = $req['tipo'];
+		if ($tipo != "Todos") {
+			$registros = Produto::orderBy('created_at', 'DESC')
+			->whereRaw('produtos.status = \'Disponivel\' AND (produtos.produto like \'%'.$search.'%\' OR produtos.descricao like \'%'.$search.'%\') AND produtos.tipo = \''.$tipo.'\'')
+			->limit(5)
+			->get();
+		}
+		else{
+		$registros = Produto::orderBy('created_at', 'DESC')
+			->whereRaw('produtos.status = \'Disponivel\' AND (produtos.produto like \'%'.$search.'%\' OR produtos.descricao like \'%'.$search.'%\')')
+			->limit(5)
+			->get();
+		}
+		if(count($registros) == 0){
+			$registros = Produto::orderBy('created_at', 'DESC')
+				->whereRaw('produtos.status = \'Disponivel\' AND produtos.tipo = \''.ucfirst($search).'\'')
+				->limit(5)
+				->get();
+			if(count($registros) > 0){
+				$busca_personalizada = 'Encontramos sua busca nos tipos de produtos.';
+				return view('dashboard.busca', compact( ['registros' , 'busca_personalizada'] ));
+			}
+		}
+		return view('dashboard.busca', compact( ['registros'] ));
+	}
 	
 	public function lista_users(){
 		$organizacoes = User::join('organizacaos', 'users.idroles', '=', 'organizacaos.id')
@@ -108,6 +136,7 @@ class SmartRecycleController extends Controller{
 	public function update_produto(Request $req, $id){
 		$dados = $req->all(); 
 		$antigo = Produto::find($id);
+
 		if($req->file('imagem')){
 			$file = $req->file('imagem');
 			$antigo['imagem_name'] = time(). '.' .$file->getClientOriginalExtension();
@@ -118,7 +147,7 @@ class SmartRecycleController extends Controller{
 			}
 			$antigo['imagem_path'] = config('app.produto_storage').'/'.$antigo['imagem_name'];
 		}
-		$antigo->update();
+		$antigo->update($dados);
 		return redirect()->route('produto');
 	}
 	public function foto_produto($id){
@@ -167,13 +196,20 @@ class SmartRecycleController extends Controller{
 		return redirect()->route('produto');
 	}
 
+	public function view_produto($id){
+		$produto = Produto::find($id);
+		return view('dashboard.view_single_produto', compact('produto'));
+	}
+	
 	public function chat_produto($id){
 		$produto = Produto::find($id);
 		$usuario = Auth::user();
+		$org = Organizacao::find($produto->idorganizacao);
+		$pessoa = Pessoa::find($produto->idpessoa);
 		if($usuario->roles < 2){
 			if($usuario->idroles == $produto->idpessoa){
 				$chat = Chat::where('id', $id)->get()[0];
-				return view('dashboard.produto-chat', compact('chat', 'id'));
+				return view('dashboard.produto-chat', compact('chat', 'id', 'produto','org', 'pessoa'));
 			}
 			else{
 				return redirect()->back();
@@ -182,7 +218,7 @@ class SmartRecycleController extends Controller{
 		else{
 			if($usuario->idroles == $produto->idorganizacao){
 				$chat = Chat::where('id', $id)->get()[0];
-				return view('dashboard.produto-chat', compact('chat', 'id'));
+				return view('dashboard.produto-chat', compact('chat', 'id', 'produto','org', 'pessoa'));
 			}
 			else{
 				return redirect()->back();

@@ -8,12 +8,12 @@
             {{ csrf_field() }}
             <div class="row">
                 <div class="form-group col-sm-12">
-                    <input name="nome" type="text" class="form-control" id="nome" placeholder="Nome">
+                    <input name="nome" type="text" class="form-control" id="nome" placeholder="Nome*" required>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-sm-12">
-                    <input name="email" type="email" class="form-control" id="email" placeholder="Email">
+                    <input name="email" type="email" class="form-control" id="email" placeholder="Email*" required>
                 </div>
             </div>
             <div class="row">
@@ -26,10 +26,10 @@
             </div>
             <div class="row">
                 <div class="form-group col-md-6 col-sm-12">
-                    <input name="password" type="password" class="form-control" id="password" placeholder="Senha">
+                    <input name="password" type="password" class="form-control" id="password" placeholder="Senha*" required>
                 </div>
                 <div class="form-group col-md-6 col-sm-12">
-                    <input name="repassword" type="password" class="form-control" id="repassword" placeholder="Repita Senha">
+                    <input name="repassword" type="password" class="form-control" id="repassword" placeholder="Repita Senha*" required>
                 </div>
             </div>
             <div class="row">

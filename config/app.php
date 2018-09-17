@@ -3,9 +3,9 @@
 return [
     //NECESSARIO COMANDO STORAGE:LINK DO ARTISAN
     'noticias_storage' => '/storage/noticias', // CAMINHO LARAVEL
-    'noticias_storage_save' => '/var/www/Projeto-de-Software-I/public/storage/noticias', //CAMINHO ABSOLUTO DA PASTA
+    'noticias_storage_save' => '/var/www/html/public/storage/noticias', //CAMINHO ABSOLUTO DA PASTA
     'produto_storage' => '/storage/produtos', // CAMINHO LARAVEL
-    'produto_storage_save' => '/var/www/Projeto-de-Software-I/public/storage/produtos', //CAMINHO ABSOLUTO DA PASTA
+    'produto_storage_save' => '/var/www/html/public/storage/produtos', //CAMINHO ABSOLUTO DA PASTA
 
     /*
     |--------------------------------------------------------------------------
