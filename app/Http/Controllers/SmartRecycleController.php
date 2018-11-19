@@ -29,6 +29,10 @@ class SmartRecycleController extends Controller{
 	}
 
 	public function busca_produto(Request $req){
+		if(Auth::user()->roles != 2){
+			return redirect()->back();
+		}
+
 		$search = $req['busca'];
 		$tipo = $req['tipo'];
 		if ($tipo != "Todos") {

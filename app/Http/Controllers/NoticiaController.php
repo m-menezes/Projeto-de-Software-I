@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use App\Noticia;
 use App\Pessoa;
 use Auth;
@@ -14,7 +15,15 @@ class NoticiaController extends Controller{
 	
 
 	public function noticias(){
-		$registros = Noticia::join('pessoas', 'noticias.idpessoa', '=', 'pessoas.id')->select('noticias.*', 'pessoas.name')->orderBy('created_at', 'DESC')->get();
+		try {
+			if ( DB::connection('sqlite')->table('noticias')->orderBy('created_at', 'DESC')->get()->count() === 0 ){
+				throw new \Exception('erro');
+			} else {
+				$registros = DB::connection('sqlite')->table('noticias')->orderBy('created_at', 'DESC')->get();
+			}
+		} catch (\Exception $e) {
+			$registros = DB::connection('sqlite2')->table('noticias')->orderBy('created_at', 'DESC')->get();
+		}
 		return view('noticias', compact( ['registros'] ));
 	}
 
@@ -33,42 +42,73 @@ class NoticiaController extends Controller{
 			$dados['imagem_path'] = config('app.noticias_storage').'/'.$dados['imagem_name'];
 			$file->move(config('app.noticias_storage_save'), $dados['imagem_name']);
 		}
-		Noticia::create($dados);
+		$database = ['sqlite', 'sqlite2'];
+		foreach ($database as $db) {
+			try{ DB::connection($db)->table('noticias')->insert($dados); }  catch (\Exception $e) { };
+		}
 		return redirect()->route('noticias');
 	}
 
 	public function deletar_noticia($id){
-		$destroy = Noticia::find($id);
-		if($destroy['imagem_path']){
-			$arquivo = (array_reverse(explode('/', $destroy['imagem_path'])))[0];
-			unlink(config('app.noticias_storage_save').'/'.$arquivo);
+		$database = ['sqlite', 'sqlite2'];
+		foreach ($database as $db) {
+			try{
+				$destroy = DB::connection($db)->table('noticias')->find($id);
+				if($destroy->imagem_path){
+					$arquivo = (array_reverse(explode('/', $destroy->imagem_path)))[0];
+					unlink(config('app.noticias_storage_save').'/'.$arquivo);
+				}
+				DB::connection($db)->table('noticias')->delete($id);
+			}
+			catch (\Exception $e) { };
 		}
-		$destroy->delete();
 		return redirect()->route('noticias');
 	}
 	
 	public function editar_noticia($id){
-		$registro = Noticia::find($id);
+		try {
+			if ( !DB::connection('sqlite')->table('noticias')->find($id) ){
+				throw new \Exception('erro');
+			} else {
+				$registro = DB::connection('sqlite')->table('noticias')->find($id);
+			}
+		} catch (\Exception $e) {
+			$registro = DB::connection('sqlite2')->table('noticias')->find($id);
+		}
 		return view('dashboard.editar', compact(['registro']));
 	}
 
+
 	public function update_noticia(Request $req, $id){
-		$novo =	$req->all();	
-		$antigo = Noticia::find($id);
-		$antigo['titulo'] = $novo['titulo'];
-		$antigo['descricao'] = $novo['descricao'];
-		$dados['idpessoa'] =  $antigo['idpessoa'];
-		if($req->file('imagem')){
+		$novo =	$req->all();
+		$database = ['sqlite', 'sqlite2'];
+		try {
+			if ( !DB::connection('sqlite')->table('noticias')->find($id) ){
+				throw new \Exception('erro');
+			} else {
+				$antigo = DB::connection('sqlite')->table('noticias')->find($id);
+			}
+		} catch (\Exception $e) {
+			$antigo = DB::connection('sqlite2')->table('noticias')->find($id);
+		}
+		$antigo->titulo = $novo['titulo'];
+		$antigo->descricao = $novo['descricao'];
+		if( $req->file('imagem')){
 			$file = $req->file('imagem');
-			$antigo['imagem_name'] = time(). '.' .$file->getClientOriginalExtension();
-			$file->move(config('app.noticias_storage_save'), $antigo['imagem_name']);
-			if($antigo['imagem_path']){
-				$arquivo = (array_reverse(explode('/', $antigo['imagem_path'])))[0];
+			$antigo->imagem_name = time(). '.' .$file->getClientOriginalExtension();
+			$file->move(config('app.noticias_storage_save'), $antigo->imagem_name);
+			if($antigo->imagem_path){
+				$arquivo = (array_reverse(explode('/', $antigo->imagem_path)))[0];
 				unlink(config('app.noticias_storage_save').'/'.$arquivo);
 			}
-			$antigo['imagem_path'] = config('app.noticias_storage').'/'.$antigo['imagem_name'];
+			$antigo->imagem_path = config('app.noticias_storage').'/'.$antigo->imagem_name;
 		}
-		$antigo->update();
+		foreach ($database as $db) {
+			try {
+				DB::connection($db)->update('update noticias set titulo = "'.$antigo->titulo.'", descricao = "'.$antigo->descricao.'", imagem_name = "'.$antigo->imagem_name.'", imagem_path = "'.$antigo->imagem_path.'"  where id = '.$id);
+			} catch (\Exception $e) {}
+		}
 		return redirect()->route('noticias');
 	}
+
 }

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Noticia extends Model
 {
+    protected $connection = 'sqlite2';
+
     protected $fillable = [
         'titulo',
         'descricao',

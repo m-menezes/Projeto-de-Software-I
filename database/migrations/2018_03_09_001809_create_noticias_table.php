@@ -13,7 +13,17 @@ class CreateNoticiasTable extends Migration
      */
     public function up()
     {
-        Schema::create('noticias', function (Blueprint $table) {
+        Schema::connection('sqlite2')->create('noticias', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('titulo');
+            $table->string('descricao');
+            $table->string('imagem_name')->nullable();
+            $table->string('imagem_path')->nullable();
+            $table->integer('idpessoa')->unsigned()->references('id')->on('pessoa');
+            $table->timestamps();
+        });
+
+        Schema::connection('sqlite')->create('noticias', function (Blueprint $table) {
             $table->increments('id');
             $table->string('titulo');
             $table->string('descricao');
@@ -31,6 +41,7 @@ class CreateNoticiasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('noticias');
+        Schema::connection('sqlite2')->dropIfExists('noticias');
+        Schema::connection('sqlite')->dropIfExists('noticias');
     }
 }

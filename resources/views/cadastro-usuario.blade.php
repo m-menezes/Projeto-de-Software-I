@@ -1,6 +1,6 @@
 @extends('template.template')
 @section('conteudo')
-<?php $titulo = "Cadastro de novos usuários"; ?>
+<?php $titulo = "Cadastro de Usuário"; ?>
 @include('_includes.titulo')
 <div class="container">
     <div class="my-4">

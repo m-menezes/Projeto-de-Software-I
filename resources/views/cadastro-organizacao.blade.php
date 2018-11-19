@@ -1,6 +1,6 @@
 @extends('template.template')
 @section('conteudo')
-<?php $titulo = "Cadastro de novas organização"; ?>
+<?php $titulo = "Cadastro de Organização"; ?>
 @include('_includes.titulo')
 <div class="container">
     <div class="my-4">
@@ -8,15 +8,15 @@
             {{ csrf_field() }}
             <div class="row">
                 <div class="form-group col-sm-12">
-                    <input name="name" required type="text" class="form-control" id="name" placeholder="Razão social">
+                    <input name="name" required type="text" class="form-control" id="name" placeholder="Razão social*">
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-6 col-sm-12">
-                    <input name="email" required type="email" class="form-control" id="email" placeholder="Email">
+                    <input name="email" required type="email" class="form-control" id="email" placeholder="Email*">
                 </div>
                 <div class="form-group col-md-6 col-sm-12">
-                    <input name="cnpj" required type="text" class="form-control" id="cnpj" placeholder="CNPJ">
+                    <input name="cnpj" required type="text" class="form-control" id="cnpj" placeholder="CNPJ*">
                 </div>
             </div>
             <div class="row">
@@ -29,10 +29,10 @@
             </div>
             <div class="row">
                 <div class="form-group col-md-6 col-sm-12">
-                    <input name="password" required type="password" class="form-control" id="password" placeholder="Senha">
+                    <input name="password" required type="password" class="form-control" id="password" placeholder="Senha*">
                 </div>
                 <div class="form-group col-md-6 col-sm-12">
-                    <input name="repassword" required type="password" class="form-control" id="repassword" placeholder="Repita Senha">
+                    <input name="repassword" required type="password" class="form-control" id="repassword" placeholder="Repita Senha*">
                 </div>
             </div>
             <div class="row">

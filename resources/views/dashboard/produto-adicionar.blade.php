@@ -11,7 +11,7 @@
 			@include('dashboard.form_produto')
 			<div class="row">
 				<div class="form-group col-12">
-					<button type="submit" class="btn btn-outline-success w-100">Atualizar</button>
+					<button type="submit" class="btn btn-outline-success w-100">Cadastrar</button>
 				</div>
 			</div>
 			@if ($errors->any())

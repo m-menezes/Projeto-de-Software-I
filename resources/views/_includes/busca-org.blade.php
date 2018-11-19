@@ -9,7 +9,7 @@
 				<div class="col-md-12">
 					<form role="form" method="get" action="{{route('busca_produto')}}">
 						<input type="text" class="searchTerm" placeholder="  Informe o que deseja buscar. Ex.: Produto" name="busca" 
-						value="<?php if(isset($_GET['busca'])){echo $_GET['busca'];}?>" required autocomplete="off">
+						value="<?php if(isset($_GET['busca'])){echo $_GET['busca'];}?>" autocomplete="off">
 						<select class="searchSelect" name="tipo">
 							<option value="Todos" <?php if(isset($_GET['tipo']) && $_GET['tipo'] == 'Todos'){echo 'selected';}?> >Tipo de Produto</option>
 							<option value="Plastico" <?php if(isset($_GET['tipo']) && $_GET['tipo'] == 'Plastico'){echo 'selected';}?>>Plastico</option>

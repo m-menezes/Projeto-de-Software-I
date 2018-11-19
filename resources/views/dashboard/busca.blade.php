@@ -30,7 +30,11 @@
 		<div class="row">
 			<?php if(count($registros) > 0) : ?>
 				<div class="col-md-12">
-					<h5 class="weight-300">Foram encontrados <b><i><?php echo count($registros); ?></i></b> resultados para esta palavra <b><i><?php echo $_GET['busca']; ?></i></b></h5>
+					<h5 class="weight-300">Foram encontrados 
+						<b><i><?php echo count($registros); ?></i></b>
+						 resultados para  <?php echo ($_GET['busca'] && !isset($busca_personalizada)) ? 'esta palavra' : 'este tipo'; ?> 
+						<b><i><?php echo ($_GET['busca'] && !isset($busca_personalizada)) ? $_GET['busca'] : $_GET['tipo']; ?></i></b>
+					</h5>
 					<small class="form-text text-muted"><?php if(isset($busca_personalizada)) echo $busca_personalizada; ?></small>
 				</div>
 				@include('dashboard.form_list_produtos')

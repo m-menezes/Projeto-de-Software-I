@@ -46,7 +46,8 @@ $usuario = Auth::user()->id;?>
 					</div>
 				</form>
 			</div>
-		</div>    
+		</div>
+		<small class="form-text text-muted">Pressione <i>enter</i> para enviar sua mensagem.</small>  
 	</div>
 
 	<script type="text/javascript">
